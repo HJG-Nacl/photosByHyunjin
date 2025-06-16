@@ -2,7 +2,6 @@
 
 import { useMusic } from "./music-context"
 import { Button } from "@/components/ui/button"
-import { Slider } from "@/components/ui/slider"
 import { Play, Pause, Volume2, X } from "lucide-react"
 
 export function MusicPlayerBar() {
@@ -39,26 +38,43 @@ export function MusicPlayerBar() {
         {/* Progress Bar - Takes up most space */}
         <div className="flex items-center gap-2 flex-1 min-w-0">
           <span className="text-xs text-gray-300 w-8 text-right flex-shrink-0">{formatTime(currentTime)}</span>
-          <Slider
-            value={[currentTime]}
-            max={duration}
-            step={1}
-            onValueChange={([value]) => seekTo(value)}
-            className="flex-1 h-1 [&_[role=slider]]:w-2 [&_[role=slider]]:h-2 [&_[role=slider]]:bg-white [&_[role=slider]]:border-gray-600 [&_.bg-primary]:bg-gray-300"
-          />
+          <div
+            className="flex-1 h-px bg-gray-600 relative cursor-pointer"
+            onClick={(e) => {
+              const rect = e.currentTarget.getBoundingClientRect()
+              const percent = (e.clientX - rect.left) / rect.width
+              seekTo(percent * duration)
+            }}
+          >
+            <div
+              className="h-px bg-white absolute top-0 left-0"
+              style={{ width: `${duration > 0 ? (currentTime / duration) * 100 : 0}%` }}
+            />
+            <div
+              className="w-2 h-2 bg-white rounded-full absolute top-1/2 -translate-y-1/2 -translate-x-1/2"
+              style={{ left: `${duration > 0 ? (currentTime / duration) * 100 : 0}%` }}
+            />
+          </div>
           <span className="text-xs text-gray-300 w-8 flex-shrink-0">{formatTime(duration)}</span>
         </div>
 
         {/* Volume Control */}
         <div className="flex items-center gap-2 flex-shrink-0">
           <Volume2 className="w-3 h-3 text-gray-300" />
-          <Slider
-            value={[volume]}
-            max={1}
-            step={0.01}
-            onValueChange={([value]) => setVolume(value)}
-            className="w-16 h-1 [&_[role=slider]]:w-2 [&_[role=slider]]:h-2 [&_[role=slider]]:bg-white [&_[role=slider]]:border-gray-600 [&_.bg-primary]:bg-gray-300"
-          />
+          <div
+            className="w-16 h-px bg-gray-600 relative cursor-pointer"
+            onClick={(e) => {
+              const rect = e.currentTarget.getBoundingClientRect()
+              const percent = (e.clientX - rect.left) / rect.width
+              setVolume(percent)
+            }}
+          >
+            <div className="h-px bg-white absolute top-0 left-0" style={{ width: `${volume * 100}%` }} />
+            <div
+              className="w-2 h-2 bg-white rounded-full absolute top-1/2 -translate-y-1/2 -translate-x-1/2"
+              style={{ left: `${volume * 100}%` }}
+            />
+          </div>
         </div>
 
         {/* Close Button */}

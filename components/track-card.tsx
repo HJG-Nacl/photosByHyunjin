@@ -17,6 +17,7 @@ interface Track {
   spotifyUrl?: string
   width?: number
   height?: number
+  photoName?: string
 }
 
 interface TrackCardProps {
@@ -72,24 +73,31 @@ export function TrackCard({ track }: TrackCardProps) {
         />
 
         {/* Overlay */}
-        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-300" />
+        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300" />
 
-        {/* Play Button */}
-        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          <Button className="w-12 h-12 rounded-full bg-white/90 hover:bg-white text-black shadow-lg" size="sm">
-            {isCurrentlyPlaying ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5 ml-0.5" />}
+        {/* Play Button - Top Right Corner */}
+        <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <Button variant="ghost" size="sm" className="p-2 hover:bg-white/20 bg-transparent rounded-full">
+            {isCurrentlyPlaying ? (
+              <Pause className="w-4 h-4 text-white drop-shadow-lg" />
+            ) : (
+              <Play className="w-4 h-4 text-white drop-shadow-lg ml-0.5" />
+            )}
           </Button>
         </div>
 
-        {/* Track Info Overlay */}
-        <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          <h3 className="font-semibold text-white text-sm truncate">{track.title}</h3>
-          <p className="text-white/80 text-xs truncate">{track.artist}</p>
+        {/* Track Info - Bottom Left - Shows Photo Name on Hover */}
+        <div className="absolute bottom-4 left-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <div className="text-left">
+            <h3 className="font-medium text-white text-sm leading-tight drop-shadow-lg">
+              {track.photoName || track.title}
+            </h3>
+          </div>
         </div>
 
         {/* Playing Indicator */}
         {isCurrentlyPlaying && (
-          <div className="absolute top-3 right-3">
+          <div className="absolute top-4 left-4">
             <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
           </div>
         )}
