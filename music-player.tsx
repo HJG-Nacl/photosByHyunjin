@@ -9,18 +9,18 @@ import { MasonryGrid } from "./components/masonry-grid"
 const tracks = [
   {
     id: "1",
-    title: "Midnight Dreams",
-    artist: "Luna Eclipse",
-    coverUrl: "/placeholder.svg?height=400&width=300",
-    spotifyUrl: "https://open.spotify.com/track/4iV5W9uYEdYUVa79Axb7Rh",
+    title: "Death & Co",
+    artist: "Ricoh GRIIIx",
+    coverUrl: "public/photos/R0000409.JPG",
+    spotifyUrl: "https://open.spotify.com/track/0uPkCpuoERqrkBL06Art50?si=6a8bba8e21f442bb",
     height: 400,
   },
   {
     id: "2",
-    title: "Ocean Waves",
+    title: "42nd Street",
     artist: "Coastal Sounds",
-    coverUrl: "/placeholder.svg?height=300&width=300",
-    audioUrl: "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav",
+    coverUrl: "public/photos/R0000432.JPG",
+    audioUrl: "https://open.spotify.com/track/3huSUfmhUr4entz2S0G31O?si=cbd56cce3e804a1d",
     height: 300,
   },
   {

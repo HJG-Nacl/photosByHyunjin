@@ -14,7 +14,7 @@ export function HeroSection() {
       {/* Left Side - Photo (3/4 of screen) */}
       <div className="w-3/4 relative">
         <Image
-          src="/placeholder.svg?height=1080&width=1920"
+          src="public/photos/R0000371.JPG"
           alt="Hero background"
           fill
           className="object-cover"
@@ -24,10 +24,9 @@ export function HeroSection() {
 
       {/* Right Side - Black Section with Text (1/4 of screen) */}
       <div className="w-1/4 bg-black flex flex-col justify-center px-8 py-16">
-        <h1 className="text-3xl md:text-4xl font-light mb-6 tracking-wide text-white">SOUND</h1>
+        <h1 className="text-3xl md:text-4xl font-light mb-6 tracking-wide text-white">PHOTO</h1>
         <p className="text-sm md:text-base font-light leading-relaxed text-white/90">
-          A visual music experience that combines curated sounds with stunning photography. Each image tells a story
-          through sound.
+          A moment captured combined with curated music
         </p>
       </div>
 
