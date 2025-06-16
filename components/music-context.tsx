@@ -61,21 +61,21 @@ export function MusicProvider({ children }: { children: React.ReactNode }) {
 
   const getSpotifyPreviewUrl = async (spotifyUrl: string): Promise<string | null> => {
     try {
-      const response = await fetch("/api/spotify", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ spotifyUrl }),
-      })
+      console.log("Fetching Spotify preview for:", spotifyUrl)
 
-      if (!response.ok) {
-        console.error("Failed to fetch Spotify preview")
+      // Dynamic import of spotify-preview-finder
+      const { getPreview } = await import("spotify-preview-finder")
+
+      const result = await getPreview(spotifyUrl)
+
+      console.log("Spotify preview result:", result)
+
+      if (result && result.preview) {
+        return result.preview
+      } else {
+        console.error("No preview URL found in result")
         return null
       }
-
-      const data = await response.json()
-      return data.previewUrl
     } catch (error) {
       console.error("Error getting Spotify preview:", error)
       return null
@@ -83,25 +83,47 @@ export function MusicProvider({ children }: { children: React.ReactNode }) {
   }
 
   const playTrack = async (track: Track) => {
+    console.log("Attempting to play track:", track.title)
+
     if (audioRef.current) {
       if (currentTrack?.id !== track.id) {
         let audioUrl = track.audioUrl
 
         // If it's a Spotify track, get the preview URL
         if (track.spotifyUrl && !track.audioUrl) {
+          console.log("Getting Spotify preview URL...")
           audioUrl = await getSpotifyPreviewUrl(track.spotifyUrl)
+
+          if (!audioUrl) {
+            console.error("No preview URL returned from Spotify")
+            alert(
+              `Sorry, "${track.title}" doesn't have a preview available. This could be because:\n\n1. The song doesn't have a 30-second preview on Spotify\n2. The Spotify URL is incorrect\n3. The track is region-restricted\n\nTry a different track or check the browser console for more details.`,
+            )
+            return
+          }
         }
 
         if (audioUrl) {
+          console.log("Setting audio source to:", audioUrl)
           audioRef.current.src = audioUrl
           setCurrentTrack(track)
         } else {
           console.error("No audio URL available for track:", track.title)
+          alert(
+            `No audio source available for "${track.title}". Please check:\n\n1. Spotify URL is correct\n2. Track has a preview available`,
+          )
           return
         }
       }
-      audioRef.current.play()
-      setIsPlaying(true)
+
+      try {
+        await audioRef.current.play()
+        setIsPlaying(true)
+        console.log("Track started playing successfully")
+      } catch (playError) {
+        console.error("Error playing audio:", playError)
+        alert(`Error playing "${track.title}". The audio file might be unavailable.`)
+      }
     }
   }
 

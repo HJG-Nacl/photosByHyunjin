@@ -30,9 +30,10 @@ export function MusicPlayerBar() {
           {isPlaying ? <Pause className="w-3 h-3 text-white" /> : <Play className="w-3 h-3 text-white" />}
         </Button>
 
-        {/* Track Name */}
-        <div className="min-w-0 flex-shrink-0 w-40">
-          <p className="font-medium text-xs text-white truncate">{currentTrack.title}</p>
+        {/* Track Name - Made wider and more prominent */}
+        <div className="min-w-0 flex-shrink-0 w-48">
+          <p className="font-medium text-sm text-white truncate">{currentTrack.title}</p>
+          <p className="text-xs text-gray-400 truncate">{currentTrack.artist}</p>
         </div>
 
         {/* Progress Bar - Takes up most space */}
