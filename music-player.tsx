@@ -10,14 +10,14 @@ import { MasonryGrid } from "./components/masonry-grid"
 const tracks = [
   {
     id: "1",
-    title: "Blinding Lights",
+    title: "42nd Street",
     artist: "The Weeknd",
     coverUrl: "/photos/R0000432.JPG",
     spotifyUrl: "https://open.spotify.com/track/0VjIjW4GlUZAMYd2vXMi3b",
   },
   {
     id: "2",
-    title: "Test Audio",
+    title: "Death & Co",
     artist: "System Sound",
     coverUrl: "/photos/R0000409.JPG",
     audioUrl: "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav",
@@ -61,14 +61,14 @@ const tracks = [
     id: "8",
     title: "Stay",
     artist: "The Kid LAROI & Justin Bieber",
-    coverUrl: "/placeholder.svg?height=420&width=300",
+    coverUrl: "/photos/45CF57EF-6CB9-40FB-B392-9D2A0BDF2A37_1_201_a.jpeg",
     spotifyUrl: "https://open.spotify.com/track/5PjdY0CKGZdEuoNab3yDmX",
   },
   {
     id: "9",
     title: "Heat Waves",
     artist: "Glass Animals",
-    coverUrl: "/placeholder.svg?height=360&width=300",
+    coverUrl: "/photos/BBBCF1FB-AE6E-4FD5-8453-54B04C9AC04C_4_5005_c.jpeg",
     spotifyUrl: "https://open.spotify.com/track/02MWAaffLxlfxAUY7c5dvx",
   },
 ]
