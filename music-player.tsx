@@ -61,7 +61,7 @@ const tracks = [
     title: "Electronic Pulse",
     artist: "Your Artist",
     photoName: "오리 부부",
-    coverUrl: "/photos/R0000068.JPG",
+    coverUrl: "/photos/R0000058.JPG",
     audioUrl: "/audio/track7.mp3",
   },
   {
