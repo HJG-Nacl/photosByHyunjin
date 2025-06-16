@@ -12,15 +12,15 @@ const tracks = [
     title: "Death & Co",
     artist: "Ricoh GRIIIx",
     coverUrl: "/photos/R0000409.JPG",
-    spotifyUrl: "https://open.spotify.com/track/0uPkCpuoERqrkBL06Art50?si=6a8bba8e21f442bb",
+    spotifyUrl: "https://open.spotify.com/track/2Lf2P7Hei9O23LeZQACn8E",
     height: 400,
   },
   {
     id: "2",
     title: "42nd Street",
-    artist: "Coastal Sounds",
+    artist: "Ricoh GRIIIx",
     coverUrl: "/photos/R0000432.JPG",
-    audioUrl: "https://open.spotify.com/track/3huSUfmhUr4entz2S0G31O?si=cbd56cce3e804a1d",
+    audioUrl: "https://open.spotify.com/track/0rG31ihx1Jurb7hzc6ixc0",
     height: 300,
   },
   {
