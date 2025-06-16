@@ -76,8 +76,16 @@ const tracks = [
     id: "9",
     title: "Cinematic Score",
     artist: "Your Artist",
-    photoName: "Subway Platform Rush",
-    coverUrl: "/placeholder.svg?height=360&width=300",
+    photoName: "Target Bag",
+    coverUrl: "/photos/0EF8CE2C-F468-4715-8600-1E7CA99AE3C6.jpeg",
+    audioUrl: "/audio/track9.mp3",
+  },
+  {
+    id: "10",
+    title: "Cinematic Score",
+    artist: "Your Artist",
+    photoName: "Target Bag",
+    coverUrl: "/photos/0EF8CE2C-F468-4715-8600-1E7CA99AE3C6.jpeg",
     audioUrl: "/audio/track9.mp3",
   },
 ]
