@@ -10,18 +10,18 @@ import { MasonryGrid } from "./components/masonry-grid"
 const tracks = [
   {
     id: "1",
-    title: "Ambient Dreams",
-    artist: "Your Artist",
+    title: "Black Swan",
+    artist: "Leellamarz, DON MALIK",
     photoName: "42nd Street",
     coverUrl: "/photos/R0000432.JPG",
-    audioUrl: "/audio/track1.mp3",
+    audioUrl: "/music/SpotiDownloader.com - Black Swan (Feat. Leellamarz, DON MALIK) - Gist.mp3",
   },
   {
     id: "2",
     title: "",
     artist: "System Sound",
     photoName: "Death & Co",
-    coverUrl: "/photos/R0000409.JPG",
+    coverUrl: "/photos/77CB7DBD-D121-4711-BD3B-C4D98AE958F6.jpeg",
     audioUrl: "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav",
   },
   {
@@ -42,11 +42,11 @@ const tracks = [
   },
   {
     id: "5",
-    title: "Nature Sounds",
-    artist: "Your Artist",
+    title: "Flying Rally",
+    artist: "DTM",
     photoName: "Looks Vintage",
     coverUrl: "/photos/R0000221.JPG",
-    audioUrl: "/audio/track5.mp3",
+    audioUrl: "/music/SpotiDownloader.com - Flying Rally - prod. DTM.mp3",
   },
   {
     id: "6",
@@ -66,27 +66,19 @@ const tracks = [
   },
   {
     id: "8",
-    title: "Acoustic Harmony",
-    artist: "Your Artist",
+    title: "MARLBORO CLUB",
+    artist: "PXRKX",
     photoName: "Bus 307",
     coverUrl: "/photos/45CF57EF-6CB9-40FB-B392-9D2A0BDF2A37_1_201_a.jpeg",
-    audioUrl: "/audio/track8.mp3",
+    audioUrl: "/music/SpotiDownloader.com - MARLBORO CLUB - PXRKX.mp3",
   },
   {
     id: "9",
-    title: "Cinematic Score",
-    artist: "Your Artist",
+    title: "Homeless",
+    artist: "Mr. Belt & Wezol",
     photoName: "Target Bag",
     coverUrl: "/photos/0EF8CE2C-F468-4715-8600-1E7CA99AE3C6.jpeg",
-    audioUrl: "/audio/track9.mp3",
-  },
-  {
-    id: "10",
-    title: "Cinematic Score",
-    artist: "Your Artist",
-    photoName: "Target Bag",
-    coverUrl: "/photos/0EF8CE2C-F468-4715-8600-1E7CA99AE3C6.jpeg",
-    audioUrl: "/audio/track9.mp3",
+    audioUrl: "/music/SpotiDownloader.com - Homeless - Mr. Belt & Wezol.mp3",
   },
 ]
 
