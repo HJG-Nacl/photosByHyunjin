@@ -4,14 +4,17 @@ import type React from "react"
 
 import { useMusic } from "./music-context"
 import { Button } from "@/components/ui/button"
-import { Play, Pause, X } from "lucide-react"
+import { Play, Pause, X, Volume2 } from "lucide-react"
 import { useState, useRef } from "react"
 
 export function MusicPlayerBar() {
-  const { currentTrack, isPlaying, currentTime, duration, togglePlayPause, seekTo, stopTrack } = useMusic()
+  const { currentTrack, isPlaying, volume, currentTime, duration, togglePlayPause, setVolume, seekTo, stopTrack } =
+    useMusic()
 
   const [isDraggingProgress, setIsDraggingProgress] = useState(false)
+  const [isDraggingVolume, setIsDraggingVolume] = useState(false)
   const progressRef = useRef<HTMLDivElement>(null)
+  const volumeRef = useRef<HTMLDivElement>(null)
 
   if (!currentTrack) return null
 
@@ -39,6 +42,32 @@ export function MusicPlayerBar() {
 
     const handleMouseUp = () => {
       setIsDraggingProgress(false)
+      document.removeEventListener("mousemove", handleMouseMove)
+      document.removeEventListener("mouseup", handleMouseUp)
+    }
+
+    document.addEventListener("mousemove", handleMouseMove)
+    document.addEventListener("mouseup", handleMouseUp)
+  }
+
+  const handleVolumeInteraction = (e: React.MouseEvent | MouseEvent) => {
+    if (volumeRef.current) {
+      const rect = volumeRef.current.getBoundingClientRect()
+      const percent = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width))
+      setVolume(percent)
+    }
+  }
+
+  const handleVolumeMouseDown = (e: React.MouseEvent) => {
+    setIsDraggingVolume(true)
+    handleVolumeInteraction(e)
+
+    const handleMouseMove = (e: MouseEvent) => {
+      handleVolumeInteraction(e)
+    }
+
+    const handleMouseUp = () => {
+      setIsDraggingVolume(false)
       document.removeEventListener("mousemove", handleMouseMove)
       document.removeEventListener("mouseup", handleMouseUp)
     }
@@ -86,6 +115,27 @@ export function MusicPlayerBar() {
             </div>
           </div>
           <span className="text-xs text-gray-300 w-8 flex-shrink-0">{formatTime(duration)}</span>
+        </div>
+
+        {/* Volume Control - Desktop only */}
+        <div className="hidden md:flex items-center gap-2 flex-shrink-0">
+          <Volume2 className="w-4 h-4 text-gray-300" />
+          <div
+            ref={volumeRef}
+            className="w-20 h-3 flex items-center cursor-pointer group"
+            onMouseDown={handleVolumeMouseDown}
+          >
+            <div className="w-full h-0.5 bg-gray-600 relative group-hover:h-1 transition-all duration-200">
+              <div
+                className="h-full bg-white absolute top-0 left-0 transition-all duration-200"
+                style={{ width: `${volume * 100}%` }}
+              />
+              <div
+                className="w-3 h-3 bg-white rounded-full absolute top-1/2 -translate-y-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+                style={{ left: `${volume * 100}%` }}
+              />
+            </div>
+          </div>
         </div>
 
         {/* Close Button */}
