@@ -19,11 +19,13 @@ interface MusicContextType {
   volume: number
   currentTime: number
   duration: number
+  lastClickedTrackId: string | null
   playTrack: (track: Track) => void
   togglePlayPause: () => void
   setVolume: (volume: number) => void
   seekTo: (time: number) => void
   stopTrack: () => void
+  setLastClickedTrackId: (trackId: string) => void
 }
 
 const MusicContext = createContext<MusicContextType | undefined>(undefined)
@@ -34,6 +36,7 @@ export function MusicProvider({ children }: { children: React.ReactNode }) {
   const [volume, setVolumeState] = useState(0.7)
   const [currentTime, setCurrentTime] = useState(0)
   const [duration, setDuration] = useState(0)
+  const [lastClickedTrackId, setLastClickedTrackId] = useState<string | null>(null)
   const audioRef = useRef<HTMLAudioElement | null>(null)
 
   useEffect(() => {
@@ -131,11 +134,13 @@ export function MusicProvider({ children }: { children: React.ReactNode }) {
         volume,
         currentTime,
         duration,
+        lastClickedTrackId,
         playTrack,
         togglePlayPause,
         setVolume,
         seekTo,
         stopTrack,
+        setLastClickedTrackId,
       }}
     >
       {children}

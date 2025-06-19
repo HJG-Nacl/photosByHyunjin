@@ -1,15 +1,31 @@
 "use client"
 
-import { ChevronDown, Camera, Film } from "lucide-react"
+import { ChevronDown, Camera, Film, Eye, EyeOff } from "lucide-react"
 import Image from "next/image"
 import { useMusic } from "./music-context"
+import { useState } from "react"
 
 export function HeroSection() {
-  const { currentTrack } = useMusic()
+  const { currentTrack, lastClickedTrackId } = useMusic()
+  const [showMetadata, setShowMetadata] = useState(true)
 
   const scrollToContent = () => {
+    // If there's a last clicked track, scroll to that specific photo
+    if (lastClickedTrackId) {
+      const element = document.getElementById(`track-${lastClickedTrackId}`)
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth", block: "center" })
+        return
+      }
+    }
+
+    // Fallback to content section if no specific track
     const element = document.getElementById("content")
     element?.scrollIntoView({ behavior: "smooth" })
+  }
+
+  const toggleMetadata = () => {
+    setShowMetadata(!showMetadata)
   }
 
   // Default photo settings
@@ -43,8 +59,6 @@ export function HeroSection() {
   const exposure = currentTrack?.exposure || defaultPhoto.exposure
   const mode = currentTrack?.mode || defaultPhoto.mode
   const date = currentTrack?.date || defaultPhoto.date
-  const trackTitle = currentTrack?.title || ""
-  const trackArtist = currentTrack?.artist || ""
 
   return (
     <div className="relative h-screen flex flex-col md:flex-row overflow-hidden mt-8">
@@ -60,11 +74,27 @@ export function HeroSection() {
       </div>
 
       {/* Camera Display - Bottom overlay on mobile, right side on desktop */}
-      <div className="absolute bottom-0 left-0 right-0 md:relative md:w-1/4 bg-black/90 md:bg-black flex flex-col justify-center px-6 py-4 md:py-16 font-mono backdrop-blur-sm md:backdrop-blur-none">
-        {/* Title */}
+      <div
+        className={`absolute bottom-0 left-0 right-0 md:relative md:w-1/4 bg-black/90 md:bg-black flex flex-col justify-center px-6 py-4 md:py-16 font-mono backdrop-blur-sm md:backdrop-blur-none transition-transform duration-300 ${
+          showMetadata ? "translate-y-0" : "translate-y-full md:translate-y-0"
+        }`}
+      >
+        {/* Title with Toggle Button */}
         <div className="mb-2 md:mb-4">
-          <h1 className="text-xs font-bold tracking-wider text-white mb-0.5">{photoName}</h1>
-          <p className="text-xs tracking-wider text-white mb-0.5">{photographer}</p>
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-xs font-bold tracking-wider text-white mb-0.5">{photoName}</h1>
+              <p className="text-xs tracking-wider text-white mb-0.5">{photographer}</p>
+            </div>
+            {/* Mobile Toggle Button - Inline with title */}
+            <button
+              onClick={toggleMetadata}
+              className="md:hidden p-1 hover:bg-gray-800/50 rounded transition-colors duration-300"
+              aria-label="Toggle metadata"
+            >
+              {showMetadata ? <EyeOff className="w-4 h-4 text-gray-400" /> : <Eye className="w-4 h-4 text-gray-400" />}
+            </button>
+          </div>
         </div>
 
         {/* Camera Info */}
@@ -78,17 +108,6 @@ export function HeroSection() {
             <span className="text-[12px] tracking-wider">{film}</span>
           </div>
         </div>
-
-        {/* Music Info - Only show if there's a current track */}
-        {currentTrack && trackTitle && (
-          <div className="space-y-1 mb-2 md:mb-4 border-t border-gray-800 pt-2 md:pt-4">
-            <div className="text-gray-400">
-              <span className="text-xs font-bold tracking-wider">NOW PLAYING</span>
-            </div>
-            <div className="text-white text-xs tracking-wider">{trackTitle}</div>
-            <div className="text-gray-400 text-xs tracking-wider">{trackArtist}</div>
-          </div>
-        )}
 
         {/* Technical Details - Compact on mobile */}
         <div className="grid grid-cols-2 md:block space-y-0 md:space-y-0.5 mb-2 md:mb-4 gap-x-4 md:gap-x-0">
@@ -111,10 +130,12 @@ export function HeroSection() {
         </div>
       </div>
 
-      {/* Scroll Indicator - Centered on the photo area */}
+      {/* Scroll Indicator - Positioned above music bar when present */}
       <button
         onClick={scrollToContent}
-        className="absolute bottom-8 left-1/2 md:left-[37.5%] transform -translate-x-1/2 text-white/70 hover:text-white transition-colors duration-300 z-10"
+        className={`absolute left-1/2 md:left-[37.5%] transform -translate-x-1/2 text-white/70 hover:text-white transition-all duration-300 z-50 ${
+          currentTrack ? "bottom-20" : "bottom-8"
+        }`}
         aria-label="Scroll to content"
       >
         <ChevronDown className="w-8 h-8 animate-bounce" />

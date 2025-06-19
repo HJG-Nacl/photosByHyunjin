@@ -6,7 +6,7 @@ import { useMusic } from "./music-context"
 import { Button } from "@/components/ui/button"
 import { Play, Pause } from "lucide-react"
 import Image from "next/image"
-import { useState } from "react"
+import { useState, useRef } from "react"
 
 interface Track {
   id: string
@@ -25,9 +25,10 @@ interface TrackCardProps {
 }
 
 export function TrackCard({ track }: TrackCardProps) {
-  const { currentTrack, isPlaying, playTrack, togglePlayPause } = useMusic()
+  const { currentTrack, isPlaying, playTrack, togglePlayPause, setLastClickedTrackId } = useMusic()
   const [imageLoaded, setImageLoaded] = useState(false)
   const [imageDimensions, setImageDimensions] = useState({ width: 0, height: 0 })
+  const cardRef = useRef<HTMLDivElement>(null)
 
   const isCurrentTrack = currentTrack?.id === track.id
   const isCurrentlyPlaying = isCurrentTrack && isPlaying
@@ -35,6 +36,9 @@ export function TrackCard({ track }: TrackCardProps) {
 
   const handlePlayClick = () => {
     if (!hasAudio) return // Don't do anything if no audio
+
+    // Store the track ID and scroll position when clicked
+    setLastClickedTrackId(track.id)
 
     if (isCurrentTrack) {
       togglePlayPause()
@@ -58,6 +62,8 @@ export function TrackCard({ track }: TrackCardProps) {
 
   return (
     <div
+      ref={cardRef}
+      id={`track-${track.id}`}
       className={`group relative w-full ${hasAudio ? "cursor-pointer" : "cursor-default"}`}
       onClick={handlePlayClick}
     >
