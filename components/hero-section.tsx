@@ -68,8 +68,14 @@ export function HeroSection() {
           src={heroImage || "/placeholder.svg"}
           alt="Hero background"
           fill
-          className="object-cover transition-all duration-500"
+          className="object-cover"
           priority
+          sizes="(max-width: 768px) 100vw, 75vw"
+          style={{
+            objectFit: "cover",
+            width: "100%",
+            height: "100%",
+          }}
         />
       </div>
 
@@ -129,6 +135,17 @@ export function HeroSection() {
           <div className="text-gray-400 text-xs tracking-wider">{date}</div>
         </div>
       </div>
+
+      {/* Floating Eye Button - Only visible when metadata is hidden on mobile */}
+      {!showMetadata && (
+        <button
+          onClick={toggleMetadata}
+          className="md:hidden absolute bottom-4 right-4 p-2 bg-black/60 hover:bg-black/80 rounded-full backdrop-blur-sm transition-all duration-300 z-40"
+          aria-label="Show metadata"
+        >
+          <Eye className="w-4 h-4 text-white" />
+        </button>
+      )}
 
       {/* Scroll Indicator - Positioned above music bar when present */}
       <button
