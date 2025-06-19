@@ -74,7 +74,7 @@ const tracks = [
     artist: "Clairo",
     photoName: "One Americano, Please",
     coverUrl: "/photos/R0000299.JPG",
-    audioUrl: "public/music/SpotiDownloader.com - Juna - Clairo.mp33",
+    audioUrl: "/music/SpotiDownloader.com - Juna - Clairo.mp33",
     // Photo metadata
     photographer: "C/O HYUNJIN",
     camera: "RICOH GRIIIx",
