@@ -1,12 +1,20 @@
 "use client"
 
+import type React from "react"
+
 import { useMusic } from "./music-context"
 import { Button } from "@/components/ui/button"
 import { Play, Pause, Volume2, X } from "lucide-react"
+import { useState, useRef } from "react"
 
 export function MusicPlayerBar() {
   const { currentTrack, isPlaying, volume, currentTime, duration, togglePlayPause, setVolume, seekTo, stopTrack } =
     useMusic()
+
+  const [isDraggingProgress, setIsDraggingProgress] = useState(false)
+  const [isDraggingVolume, setIsDraggingVolume] = useState(false)
+  const progressRef = useRef<HTMLDivElement>(null)
+  const volumeRef = useRef<HTMLDivElement>(null)
 
   if (!currentTrack) return null
 
@@ -14,6 +22,58 @@ export function MusicPlayerBar() {
     const minutes = Math.floor(time / 60)
     const seconds = Math.floor(time % 60)
     return `${minutes}:${seconds.toString().padStart(2, "0")}`
+  }
+
+  const handleProgressInteraction = (e: React.MouseEvent | MouseEvent) => {
+    if (progressRef.current) {
+      const rect = progressRef.current.getBoundingClientRect()
+      const percent = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width))
+      seekTo(percent * duration)
+    }
+  }
+
+  const handleVolumeInteraction = (e: React.MouseEvent | MouseEvent) => {
+    if (volumeRef.current) {
+      const rect = volumeRef.current.getBoundingClientRect()
+      const percent = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width))
+      setVolume(percent)
+    }
+  }
+
+  const handleProgressMouseDown = (e: React.MouseEvent) => {
+    setIsDraggingProgress(true)
+    handleProgressInteraction(e)
+
+    const handleMouseMove = (e: MouseEvent) => {
+      handleProgressInteraction(e)
+    }
+
+    const handleMouseUp = () => {
+      setIsDraggingProgress(false)
+      document.removeEventListener("mousemove", handleMouseMove)
+      document.removeEventListener("mouseup", handleMouseUp)
+    }
+
+    document.addEventListener("mousemove", handleMouseMove)
+    document.addEventListener("mouseup", handleMouseUp)
+  }
+
+  const handleVolumeMouseDown = (e: React.MouseEvent) => {
+    setIsDraggingVolume(true)
+    handleVolumeInteraction(e)
+
+    const handleMouseMove = (e: MouseEvent) => {
+      handleVolumeInteraction(e)
+    }
+
+    const handleMouseUp = () => {
+      setIsDraggingVolume(false)
+      document.removeEventListener("mousemove", handleMouseMove)
+      document.removeEventListener("mouseup", handleMouseUp)
+    }
+
+    document.addEventListener("mousemove", handleMouseMove)
+    document.addEventListener("mouseup", handleMouseUp)
   }
 
   return (
@@ -29,51 +89,52 @@ export function MusicPlayerBar() {
           {isPlaying ? <Pause className="w-3 h-3 text-white" /> : <Play className="w-3 h-3 text-white" />}
         </Button>
 
-        {/* Track Name - Made wider and more prominent */}
+        {/* Track Name */}
         <div className="min-w-0 flex-shrink-0 w-48">
           <p className="font-medium text-sm text-white truncate">{currentTrack.title}</p>
           <p className="text-xs text-gray-400 truncate">{currentTrack.artist}</p>
         </div>
 
-        {/* Progress Bar - Takes up most space */}
+        {/* Progress Bar - Draggable */}
         <div className="flex items-center gap-2 flex-1 min-w-0">
           <span className="text-xs text-gray-300 w-8 text-right flex-shrink-0">{formatTime(currentTime)}</span>
           <div
-            className="flex-1 h-px bg-gray-600 relative cursor-pointer"
-            onClick={(e) => {
-              const rect = e.currentTarget.getBoundingClientRect()
-              const percent = (e.clientX - rect.left) / rect.width
-              seekTo(percent * duration)
-            }}
+            ref={progressRef}
+            className="flex-1 h-3 flex items-center cursor-pointer group"
+            onMouseDown={handleProgressMouseDown}
           >
-            <div
-              className="h-px bg-white absolute top-0 left-0"
-              style={{ width: `${duration > 0 ? (currentTime / duration) * 100 : 0}%` }}
-            />
-            <div
-              className="w-2 h-2 bg-white rounded-full absolute top-1/2 -translate-y-1/2 -translate-x-1/2"
-              style={{ left: `${duration > 0 ? (currentTime / duration) * 100 : 0}%` }}
-            />
+            <div className="w-full h-0.5 bg-gray-600 relative group-hover:h-1 transition-all duration-200">
+              <div
+                className="h-full bg-white absolute top-0 left-0 transition-all duration-200"
+                style={{ width: `${duration > 0 ? (currentTime / duration) * 100 : 0}%` }}
+              />
+              <div
+                className="w-3 h-3 bg-white rounded-full absolute top-1/2 -translate-y-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+                style={{ left: `${duration > 0 ? (currentTime / duration) * 100 : 0}%` }}
+              />
+            </div>
           </div>
           <span className="text-xs text-gray-300 w-8 flex-shrink-0">{formatTime(duration)}</span>
         </div>
 
-        {/* Volume Control */}
+        {/* Volume Control - Draggable */}
         <div className="flex items-center gap-2 flex-shrink-0">
           <Volume2 className="w-3 h-3 text-gray-300" />
           <div
-            className="w-16 h-px bg-gray-600 relative cursor-pointer"
-            onClick={(e) => {
-              const rect = e.currentTarget.getBoundingClientRect()
-              const percent = (e.clientX - rect.left) / rect.width
-              setVolume(percent)
-            }}
+            ref={volumeRef}
+            className="w-16 h-3 flex items-center cursor-pointer group"
+            onMouseDown={handleVolumeMouseDown}
           >
-            <div className="h-px bg-white absolute top-0 left-0" style={{ width: `${volume * 100}%` }} />
-            <div
-              className="w-2 h-2 bg-white rounded-full absolute top-1/2 -translate-y-1/2 -translate-x-1/2"
-              style={{ left: `${volume * 100}%` }}
-            />
+            <div className="w-full h-0.5 bg-gray-600 relative group-hover:h-1 transition-all duration-200">
+              <div
+                className="h-full bg-white absolute top-0 left-0 transition-all duration-200"
+                style={{ width: `${volume * 100}%` }}
+              />
+              <div
+                className="w-3 h-3 bg-white rounded-full absolute top-1/2 -translate-y-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+                style={{ left: `${volume * 100}%` }}
+              />
+            </div>
           </div>
         </div>
 

@@ -14,7 +14,7 @@ export function HeroSection() {
       {/* Left Side - Photo (3/4 of screen) */}
       <div className="w-3/4 relative">
         <Image
-          src="/photos/R0000372.JPG"
+          src="/placeholder.svg?height=1080&width=1920"
           alt="Hero background"
           fill
           className="object-cover"

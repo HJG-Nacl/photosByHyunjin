@@ -31,8 +31,11 @@ export function TrackCard({ track }: TrackCardProps) {
 
   const isCurrentTrack = currentTrack?.id === track.id
   const isCurrentlyPlaying = isCurrentTrack && isPlaying
+  const hasAudio = Boolean(track.audioUrl)
 
   const handlePlayClick = () => {
+    if (!hasAudio) return // Don't do anything if no audio
+
     if (isCurrentTrack) {
       togglePlayPause()
     } else {
@@ -54,7 +57,10 @@ export function TrackCard({ track }: TrackCardProps) {
     imageDimensions.width && imageDimensions.height ? imageDimensions.width / imageDimensions.height : 1
 
   return (
-    <div className="group relative cursor-pointer w-full" onClick={handlePlayClick}>
+    <div
+      className={`group relative w-full ${hasAudio ? "cursor-pointer" : "cursor-default"}`}
+      onClick={handlePlayClick}
+    >
       <div
         className="relative w-full overflow-hidden rounded-lg"
         style={{
@@ -75,16 +81,18 @@ export function TrackCard({ track }: TrackCardProps) {
         {/* Overlay */}
         <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300" />
 
-        {/* Play Button - Top Right Corner */}
-        <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          <Button variant="ghost" size="sm" className="p-2 hover:bg-white/20 bg-transparent rounded-full">
-            {isCurrentlyPlaying ? (
-              <Pause className="w-4 h-4 text-white drop-shadow-lg" />
-            ) : (
-              <Play className="w-4 h-4 text-white drop-shadow-lg ml-0.5" />
-            )}
-          </Button>
-        </div>
+        {/* Play Button - Only show if has audio */}
+        {hasAudio && (
+          <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <Button variant="ghost" size="sm" className="p-2 hover:bg-white/20 bg-transparent rounded-full">
+              {isCurrentlyPlaying ? (
+                <Pause className="w-4 h-4 text-white drop-shadow-lg" />
+              ) : (
+                <Play className="w-4 h-4 text-white drop-shadow-lg ml-0.5" />
+              )}
+            </Button>
+          </div>
+        )}
 
         {/* Track Info - Bottom Left - Shows Photo Name on Hover */}
         <div className="absolute bottom-4 left-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -92,11 +100,15 @@ export function TrackCard({ track }: TrackCardProps) {
             <h3 className="font-medium text-white text-sm leading-tight drop-shadow-lg">
               {track.photoName || track.title}
             </h3>
+            {/* Only show artist if it has audio */}
+            {hasAudio && (
+              <p className="text-white/70 text-xs font-normal leading-tight drop-shadow-lg">{track.artist}</p>
+            )}
           </div>
         </div>
 
-        {/* Playing Indicator */}
-        {isCurrentlyPlaying && (
+        {/* Playing Indicator - Only show if has audio and is playing */}
+        {hasAudio && isCurrentlyPlaying && (
           <div className="absolute top-4 left-4">
             <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
           </div>

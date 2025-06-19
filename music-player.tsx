@@ -6,7 +6,7 @@ import { TopNav } from "./components/top-nav"
 import { HeroSection } from "./components/hero-section"
 import { MasonryGrid } from "./components/masonry-grid"
 
-// Updated tracks data - using MP3 files instead of Spotify
+// Updated tracks data with your photos and music
 const tracks = [
   {
     id: "1",
