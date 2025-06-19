@@ -47,9 +47,9 @@ export function HeroSection() {
   const trackArtist = currentTrack?.artist || ""
 
   return (
-    <div className="relative h-screen flex overflow-hidden mt-8">
-      {/* Left Side - Photo (3/4 of screen) */}
-      <div className="w-3/4 relative">
+    <div className="relative h-screen flex flex-col md:flex-row overflow-hidden mt-8">
+      {/* Photo Section - Full width on mobile, 3/4 on desktop */}
+      <div className="w-full md:w-3/4 relative flex-1">
         <Image
           src={heroImage || "/placeholder.svg"}
           alt="Hero background"
@@ -59,16 +59,16 @@ export function HeroSection() {
         />
       </div>
 
-      {/* Right Side - Camera Display Style */}
-      <div className="w-1/4 bg-black flex flex-col justify-center px-6 py-16 font-mono">
+      {/* Camera Display - Bottom overlay on mobile, right side on desktop */}
+      <div className="absolute bottom-0 left-0 right-0 md:relative md:w-1/4 bg-black/90 md:bg-black flex flex-col justify-center px-6 py-4 md:py-16 font-mono backdrop-blur-sm md:backdrop-blur-none">
         {/* Title */}
-        <div className="mb-4">
+        <div className="mb-2 md:mb-4">
           <h1 className="text-xs font-bold tracking-wider text-white mb-0.5">{photoName}</h1>
           <p className="text-xs tracking-wider text-white mb-0.5">{photographer}</p>
         </div>
 
         {/* Camera Info */}
-        <div className="space-y-1 mb-4">
+        <div className="space-y-1 mb-2 md:mb-4">
           <div className="flex items-center gap-2 text-gray-400">
             <Camera className="w-4 h-4" />
             <span className="text-xs tracking-wider">{camera}</span>
@@ -81,7 +81,7 @@ export function HeroSection() {
 
         {/* Music Info - Only show if there's a current track */}
         {currentTrack && trackTitle && (
-          <div className="space-y-1 mb-4 border-t border-gray-800 pt-4">
+          <div className="space-y-1 mb-2 md:mb-4 border-t border-gray-800 pt-2 md:pt-4">
             <div className="text-gray-400">
               <span className="text-xs font-bold tracking-wider">NOW PLAYING</span>
             </div>
@@ -90,8 +90,8 @@ export function HeroSection() {
           </div>
         )}
 
-        {/* Technical Details */}
-        <div className="space-y-0.5 mb-4">
+        {/* Technical Details - Compact on mobile */}
+        <div className="grid grid-cols-2 md:block space-y-0 md:space-y-0.5 mb-2 md:mb-4 gap-x-4 md:gap-x-0">
           <div className="text-gray-400">
             <span className="text-sm font-bold">{focalLength}</span>
             <span className="text-gray-400 text-xs ml-2">{equivalentFocalLength}</span>
@@ -102,19 +102,19 @@ export function HeroSection() {
           <div className="text-gray-400 text-xs">{exposure}</div>
         </div>
 
-        {/* Mode */}
-        <div className="mb-4">
-          <span className="bg-gray-800 px-2 py-1 text-[10px] text-gray-400 tracking-wider">{mode}</span>
+        {/* Mode and Date - Single row on mobile */}
+        <div className="flex flex-col md:block space-y-1 md:space-y-2">
+          <span className="bg-gray-800 px-2 py-1 text-[10px] text-gray-400 tracking-wider inline-block w-fit">
+            {mode}
+          </span>
+          <div className="text-gray-400 text-xs tracking-wider">{date}</div>
         </div>
-
-        {/* Date */}
-        <div className="text-gray-400 text-xs tracking-wider mb-4">{date}</div>
       </div>
 
       {/* Scroll Indicator - Centered on the photo area */}
       <button
         onClick={scrollToContent}
-        className="absolute bottom-8 left-[37.5%] transform -translate-x-1/2 text-white/70 hover:text-white transition-colors duration-300 z-10"
+        className="absolute bottom-8 left-1/2 md:left-[37.5%] transform -translate-x-1/2 text-white/70 hover:text-white transition-colors duration-300 z-10"
         aria-label="Scroll to content"
       >
         <ChevronDown className="w-8 h-8 animate-bounce" />
