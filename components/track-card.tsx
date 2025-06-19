@@ -62,7 +62,7 @@ export function TrackCard({ track }: TrackCardProps) {
       onClick={handlePlayClick}
     >
       <div
-        className="relative w-full overflow-hidden rounded-lg"
+        className="relative w-full overflow-hidden rounded-lg bg-black border-0"
         style={{
           aspectRatio: imageLoaded ? aspectRatio : "1",
           minHeight: "200px",
@@ -73,9 +73,10 @@ export function TrackCard({ track }: TrackCardProps) {
           src={track.coverUrl || "/placeholder.svg"}
           alt={track.title}
           fill
-          className="object-cover transition-transform duration-500 group-hover:scale-105"
+          className="object-cover transition-transform duration-500 group-hover:scale-105 border-0 outline-0"
           onLoad={handleImageLoad}
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          style={{ border: "none", outline: "none" }}
         />
 
         {/* Overlay */}
@@ -94,16 +95,12 @@ export function TrackCard({ track }: TrackCardProps) {
           </div>
         )}
 
-        {/* Track Info - Bottom Left - Shows Photo Name on Hover */}
+        {/* Photo Name - Bottom Left - Always shows photo name only */}
         <div className="absolute bottom-4 left-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
           <div className="text-left">
             <h3 className="font-medium text-white text-sm leading-tight drop-shadow-lg">
               {track.photoName || track.title}
             </h3>
-            {/* Only show artist if it has audio */}
-            {hasAudio && (
-              <p className="text-white/70 text-xs font-normal leading-tight drop-shadow-lg">{track.artist}</p>
-            )}
           </div>
         </div>
 

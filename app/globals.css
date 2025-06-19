@@ -12,6 +12,12 @@
     padding: 0;
     background-color: #000000;
   }
+
+  /* Remove any default borders from images */
+  img {
+    border: none !important;
+    outline: none !important;
+  }
 }
 
 /* Custom scrollbar for dark mode */
@@ -36,4 +42,15 @@
 ::selection {
   background: rgba(255, 255, 255, 0.2);
   color: white;
+}
+
+/* Ensure no borders on any elements */
+* {
+  box-sizing: border-box;
+}
+
+/* Remove default Next.js image borders */
+img[data-nimg] {
+  border: none !important;
+  outline: none !important;
 }

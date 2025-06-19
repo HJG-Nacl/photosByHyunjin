@@ -10,6 +10,7 @@ interface Track {
   coverUrl: string
   audioUrl?: string
   spotifyUrl?: string
+  photoName?: string
 }
 
 interface MusicContextType {
