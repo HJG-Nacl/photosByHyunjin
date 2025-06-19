@@ -188,6 +188,25 @@ const tracks = [
     mode: "MOBILE/MACRO",
     date: "9 Jun 2025 11:47 AM",
   },
+  {
+    id: "10",
+    title: "",
+    artist: "",
+    photoName: "Schmuck",
+    coverUrl: "public/photos/R0000372.JPG",
+    // Photo metadata
+    photographer: "C/O HYUNJIN",
+    camera: "RICOH GRIIIx",
+    film: "Classic Chrome",
+    focalLength: "77mm",
+    equivalentFocalLength: "77mm",
+    aperture: "f/2.8",
+    shutterSpeed: "1/60",
+    iso: "ISO 1000",
+    exposure: "+0.7ev",
+    mode: "RESTAURANT/MACRO",
+    date: "9 Jun 2025 11:47 AM",
+  },
 ]
 
 export default function MusicPlayer() {
