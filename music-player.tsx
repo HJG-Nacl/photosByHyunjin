@@ -193,7 +193,7 @@ const tracks = [
     title: "",
     artist: "",
     photoName: "Schmuck",
-    coverUrl: "public/photos/R0000372.JPG",
+    coverUrl: "/photos/R0000372.JPG",
     // Photo metadata
     photographer: "C/O HYUNJIN",
     camera: "RICOH GRIIIx",
