@@ -1,18 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import "./fonts.css";
 
 @layer base {
   html {
     scroll-behavior: smooth;
-    font-family: "IBMPlexMono-Regular", system-ui, -apple-system, sans-serif;
+    font-family: "IBMPlexMono-Regular";
   }
 
   body {
     margin: 0;
     padding: 0;
     background-color: #000000;
-    font-family: "IBMPlexMono-Regular", system-ui, -apple-system, sans-serif;
+    font-family: "IBMPlexMono-Regular";
   }
 
   /* Remove any default borders from images */
