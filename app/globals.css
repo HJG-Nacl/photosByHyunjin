@@ -6,14 +6,14 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    font-family: "IBMPlexMono-Regular";
+    font-family: "IBMPlexMono-Medium";
   }
 
   body {
     margin: 0;
     padding: 0;
     background-color: #000000;
-    font-family: "IBMPlexMono-Regular";
+    font-family: "IBMPlexMono-MediumItalic";
   }
 
   /* Remove any default borders from images */
