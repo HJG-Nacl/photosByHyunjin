@@ -1,9 +1,7 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Inter } from "next/font/google"
 import "./globals.css"
-
-const inter = Inter({ subsets: ["latin"] })
+import "./fonts.css"
 
 export const metadata: Metadata = {
   title: "@photos_by_hyunjin",
@@ -34,7 +32,7 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/favicon.ico" />
       </head>
-      <body className={inter.className}>{children}</body>
+      <body className="font-custom">{children}</body>
     </html>
   )
 }
