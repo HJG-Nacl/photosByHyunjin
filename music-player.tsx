@@ -6,14 +6,14 @@ import { TopNav } from "./components/top-nav"
 import { HeroSection } from "./components/hero-section"
 import { MasonryGrid } from "./components/masonry-grid"
 
-// Updated tracks data with individual photo metadata
+// Updated tracks data with placeholder images for demo
 const tracks = [
   {
     id: "1",
     title: "Black Swan",
     artist: "Leellamarz, DON MALIK",
     photoName: "42nd Street",
-    coverUrl: "/photos/R0000432.JPG",
+    coverUrl: "/placeholder.svg?height=800&width=600",
     audioUrl: "/music/SpotiDownloader.com - Black Swan (Feat. Leellamarz, DON MALIK) - Gist.mp3",
     // Photo metadata
     photographer: "C/O HYUNJIN",
@@ -33,7 +33,7 @@ const tracks = [
     title: "whoops",
     artist: "- brb..",
     photoName: "Death & Co",
-    coverUrl: "/photos/77CB7DBD-D121-4711-BD3B-C4D98AE958F6.jpeg",
+    coverUrl: "/placeholder.svg?height=600&width=800",
     audioUrl: "/music/SpotiDownloader.com - whoops - brb..mp3",
     // Photo metadata
     photographer: "C/O HYUNJIN",
@@ -53,7 +53,7 @@ const tracks = [
     title: "Neverender",
     artist: "Justice",
     photoName: "W 23 St 5 Av",
-    coverUrl: "/photos/R0000308.JPG",
+    coverUrl: "/placeholder.svg?height=900&width=600",
     audioUrl: "/music/SpotiDownloader.com - Neverender - Justice.mp3",
     // Photo metadata
     photographer: "C/O HYUNJIN",
@@ -73,7 +73,7 @@ const tracks = [
     title: "Juna",
     artist: "Clairo",
     photoName: "One Americano, Please",
-    coverUrl: "/photos/R0000299.JPG",
+    coverUrl: "/placeholder.svg?height=700&width=500",
     audioUrl: "/music/SpotiDownloader.com - Juna - Clairo.mp3",
     // Photo metadata
     photographer: "C/O HYUNJIN",
@@ -93,7 +93,7 @@ const tracks = [
     title: "Flying Rally",
     artist: "DTM",
     photoName: "Semi Sports",
-    coverUrl: "/photos/R0000221.JPG",
+    coverUrl: "/placeholder.svg?height=600&width=900",
     audioUrl: "/music/SpotiDownloader.com - Flying Rally - prod. DTM.mp3",
     // Photo metadata
     photographer: "C/O HYUNJIN",
@@ -113,7 +113,7 @@ const tracks = [
     title: "Seasons",
     artist: "Wave to Earth",
     photoName: "Reflection",
-    coverUrl: "/photos/R0000071.JPG",
+    coverUrl: "/placeholder.svg?height=800&width=500",
     audioUrl: "/music/SpotiDownloader.com - seasons - wave to earth.mp3",
     // Photo metadata
     photographer: "C/O HYUNJIN",
@@ -133,7 +133,7 @@ const tracks = [
     title: "Side by side",
     artist: "jisokuryClub",
     photoName: "오리 부부",
-    coverUrl: "/photos/R0000058.JPG",
+    coverUrl: "/placeholder.svg?height=600&width=600",
     audioUrl: "/music/SpotiDownloader.com - Side by side - jisokuryClub.mp3",
     // Photo metadata
     photographer: "C/O HYUNJIN",
@@ -153,7 +153,7 @@ const tracks = [
     title: "MARLBORO CLUB",
     artist: "PXRKX",
     photoName: "Bus 307",
-    coverUrl: "/photos/45CF57EF-6CB9-40FB-B392-9D2A0BDF2A37_1_201_a.jpeg",
+    coverUrl: "/placeholder.svg?height=500&width=700",
     audioUrl: "/music/SpotiDownloader.com - MARLBORO CLUB - PXRKX.mp3",
     // Photo metadata
     photographer: "C/O HYUNJIN",
@@ -173,7 +173,7 @@ const tracks = [
     title: "Homeless",
     artist: "Mr. Belt & Wezol",
     photoName: "Target Bag",
-    coverUrl: "/photos/0EF8CE2C-F468-4715-8600-1E7CA99AE3C6.jpeg",
+    coverUrl: "/placeholder.svg?height=700&width=600",
     audioUrl: "/music/SpotiDownloader.com - Homeless - Mr. Belt & Wezol.mp3",
     // Photo metadata
     photographer: "C/O HYUNJIN",
@@ -193,7 +193,7 @@ const tracks = [
     title: "",
     artist: "",
     photoName: "Schmuck",
-    coverUrl: "/photos/R0000372.JPG",
+    coverUrl: "/placeholder.svg?height=800&width=700",
     // Photo metadata
     photographer: "C/O HYUNJIN",
     camera: "RICOH GRIIIx",
@@ -223,8 +223,8 @@ export default function MusicPlayer() {
         <div id="content" className="bg-black">
           {/* Title Section */}
           <div className="max-w-4xl mx-auto px-6 py-16 text-center">
-            <h2 className="text-4xl md:text-5xl font-light mb-6 text-white">Photos_By_Hyunjin_</h2>
-            <p className="text-lg text-gray-300 leading-relaxed max-w-2xl mx-auto">
+            <h2 className="text-4xl md:text-5xl font-light mb-6 text-white tracking-wide">Photos_By_Hyunjin_</h2>
+            <p className="text-lg text-gray-300 leading-relaxed max-w-2xl mx-auto font-light">
               A carefully selected collection of musical pieces designed to inspire, focus, and transport you to
               different worlds. Each track tells its own story through sound.
             </p>

@@ -28,9 +28,9 @@ export function HeroSection() {
     setShowMetadata(!showMetadata)
   }
 
-  // Default photo settings
+  // Default photo settings with placeholder image
   const defaultPhoto = {
-    coverUrl: "/photos/R0000372.JPG",
+    coverUrl: "/placeholder.svg?height=1200&width=800",
     photoName: "6ST 1ST AVE",
     photographer: "C/O HYUNJIN",
     camera: "RICOH GRIIIx",
@@ -65,7 +65,7 @@ export function HeroSection() {
       {/* Photo Section - Full width on mobile, 3/4 on desktop */}
       <div className="w-full md:w-3/4 relative flex-1">
         <ProgressiveImage
-          src={heroImage || "/placeholder.svg"}
+          src={heroImage}
           alt="Hero background"
           fill
           className="object-cover"
@@ -89,8 +89,8 @@ export function HeroSection() {
         <div className="mb-2 md:mb-4">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-xs font-bold tracking-wider text-white mb-0.5">{photoName}</h1>
-              <p className="text-xs tracking-wider text-white mb-0.5">{photographer}</p>
+              <h1 className="text-xs font-bold tracking-wider text-white mb-0.5 uppercase">{photoName}</h1>
+              <p className="text-xs tracking-wider text-white mb-0.5 italic font-light">{photographer}</p>
             </div>
             {/* Mobile Toggle Button - Inline with title */}
             <button
@@ -107,11 +107,11 @@ export function HeroSection() {
         <div className="space-y-1 mb-2 md:mb-4">
           <div className="flex items-center gap-2 text-gray-400">
             <Camera className="w-4 h-4" />
-            <span className="text-xs tracking-wider">{camera}</span>
+            <span className="text-xs tracking-wider font-medium">{camera}</span>
           </div>
           <div className="flex items-center gap-2 text-gray-400">
             <Film className="w-4 h-4" />
-            <span className="text-[12px] tracking-wider">{film}</span>
+            <span className="text-[12px] tracking-wider font-light italic">{film}</span>
           </div>
         </div>
 
@@ -119,20 +119,20 @@ export function HeroSection() {
         <div className="grid grid-cols-2 md:block space-y-0 md:space-y-0.5 mb-2 md:mb-4 gap-x-4 md:gap-x-0">
           <div className="text-gray-400">
             <span className="text-sm font-bold">{focalLength}</span>
-            <span className="text-gray-400 text-xs ml-2">{equivalentFocalLength}</span>
+            <span className="text-gray-400 text-xs ml-2 font-extralight">({equivalentFocalLength})</span>
           </div>
-          <div className="text-gray-400 text-xs">{aperture}</div>
-          <div className="text-gray-400 text-xs">{shutterSpeed}</div>
-          <div className="text-gray-400 text-xs">{iso}</div>
-          <div className="text-gray-400 text-xs">{exposure}</div>
+          <div className="text-gray-400 text-xs font-medium">{aperture}</div>
+          <div className="text-gray-400 text-xs font-medium">{shutterSpeed}</div>
+          <div className="text-gray-400 text-xs font-semibold">{iso}</div>
+          <div className="text-gray-400 text-xs font-light italic">{exposure}</div>
         </div>
 
         {/* Mode and Date - Single row on mobile */}
         <div className="flex flex-col md:block space-y-1 md:space-y-2">
-          <span className="bg-gray-800 px-2 py-1 text-[10px] text-gray-400 tracking-wider inline-block w-fit">
+          <span className="bg-gray-800 px-2 py-1 text-[10px] text-gray-400 tracking-wider inline-block w-fit font-bold uppercase">
             {mode}
           </span>
-          <div className="text-gray-400 text-xs tracking-wider">{date}</div>
+          <div className="text-gray-400 text-xs tracking-wider font-extralight">{date}</div>
         </div>
       </div>
 

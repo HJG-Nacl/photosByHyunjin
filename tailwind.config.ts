@@ -90,7 +90,17 @@ const config: Config = {
         "accordion-up": "accordion-up 0.2s ease-out",
       },
       fontFamily: {
-        custom: ["IBMPlexMono-Regular", "system-ui", "-apple-system", "sans-serif"],
+        mono: ["var(--font-ibm-plex-mono)", "Monaco", "Menlo", "Ubuntu Mono", "monospace"],
+        custom: ["var(--font-ibm-plex-mono)", "Monaco", "Menlo", "Ubuntu Mono", "monospace"],
+      },
+      fontWeight: {
+        thin: "100",
+        extralight: "200",
+        light: "300",
+        normal: "400",
+        medium: "500",
+        semibold: "600",
+        bold: "700",
       },
     },
   },

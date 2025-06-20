@@ -1,19 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import "./fonts.css";
 
 @layer base {
+  :root {
+    --font-ibm-plex-mono: "IBM Plex Mono", Monaco, Menlo, "Ubuntu Mono", monospace;
+  }
+
   html {
     scroll-behavior: smooth;
-    font-family: "IBMPlexMono-Medium";
+    font-family: var(--font-ibm-plex-mono);
   }
 
   body {
     margin: 0;
     padding: 0;
     background-color: #000000;
-    font-family: "IBMPlexMono-MediumItalic";
+    font-family: var(--font-ibm-plex-mono);
+    font-weight: 400;
   }
 
   /* Remove any default borders from images */
