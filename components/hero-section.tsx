@@ -30,7 +30,7 @@ export function HeroSection() {
 
   // Default photo settings with placeholder image
   const defaultPhoto = {
-    coverUrl: "/placeholder.svg?height=1200&width=800",
+    coverUrl: "/photos/R0000372.JPG",
     photoName: "6ST 1ST AVE",
     photographer: "C/O HYUNJIN",
     camera: "RICOH GRIIIx",
