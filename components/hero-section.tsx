@@ -1,7 +1,7 @@
 "use client"
 
 import { ChevronDown, Camera, Film, Eye, EyeOff } from "lucide-react"
-import Image from "next/image"
+import { ProgressiveImage } from "./progressive-image"
 import { useMusic } from "./music-context"
 import { useState } from "react"
 
@@ -64,7 +64,7 @@ export function HeroSection() {
     <div className="relative h-screen flex flex-col md:flex-row overflow-hidden mt-8">
       {/* Photo Section - Full width on mobile, 3/4 on desktop */}
       <div className="w-full md:w-3/4 relative flex-1">
-        <Image
+        <ProgressiveImage
           src={heroImage || "/placeholder.svg"}
           alt="Hero background"
           fill

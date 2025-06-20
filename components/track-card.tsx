@@ -5,7 +5,7 @@ import type React from "react"
 import { useMusic } from "./music-context"
 import { Button } from "@/components/ui/button"
 import { Play, Pause } from "lucide-react"
-import Image from "next/image"
+import { ProgressiveImage } from "./progressive-image"
 import { useState, useRef } from "react"
 
 interface Track {
@@ -75,7 +75,7 @@ export function TrackCard({ track }: TrackCardProps) {
           maxHeight: "600px",
         }}
       >
-        <Image
+        <ProgressiveImage
           src={track.coverUrl || "/placeholder.svg"}
           alt={track.title}
           fill
